@@ -24,13 +24,13 @@ const exercisesData = [
         id: 'ej1_primer_ajuste',
         type: 'radio',
         title: 'Ejercicio 1: Particiones Variables con Primer Ajuste (First-Fit)',
-        question: 'Un sistema con particiones variables tiene en memoria 8 huecos libres ordenados por dirección física: [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB]. Se reciben en orden sucesivo las solicitudes a) 12 KB, b) 9 KB y c) 10 KB. ¿Qué huecos se usarán respectivamente si se aplica Primer Ajuste?',
+        question: 'Un sistema con particiones variables tiene en memoria 8 huecos libres ordenados por dirección física: [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB]. Se reciben en orden sucesivo las solicitudes a) 12 KB, b) 9 KB y c) 10 KB. Si se aplica Primer Ajuste, ¿de qué huecos originales se realizará cada asignación, considerando que el espacio remanente de un hueco continúa disponible?',
         biblio: 'Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19',
         labRef: { id: 'alloc-simulator', name: 'Laboratorio 1: Asignación Continua', badge: '🧪 Lab 1: Particiones Variables' },
-        labHint: 'En el Simulador 1, selecciona "Primer Ajuste (First-Fit)" con los 8 huecos iniciales y pulsa "Ejecutar Todo" para observar qué hueco toma cada proceso (P1: 12 KB, P2: 9 KB, P3: 10 KB).',
+        labHint: 'En el Simulador 1, selecciona "Primer Ajuste (First-Fit)" con los 8 huecos iniciales y pulsa sucesivamente "Siguiente Solicitud" para observar qué hueco toma cada proceso (P1: 12 KB, P2: 9 KB, P3: 10 KB).',
         options: [
-            { value: 'h20_h10_h12', label: 'a en hueco 20 KB, b en hueco 10 KB y c en hueco 12 KB' },
             { value: 'h12_h9_h10', label: 'a en hueco 12 KB, b en hueco 9 KB y c en hueco 10 KB' },
+            { value: 'h20_h10_h12', label: 'a en hueco 20 KB, b en hueco 10 KB y c en hueco 12 KB' },
             { value: 'h20_h18_h15', label: 'a en hueco 20 KB, b en hueco 18 KB y c en hueco 15 KB' },
             { value: 'h12_h20_h18', label: 'a en hueco 12 KB, b en hueco 20 KB y c en hueco 18 KB' }
         ]
@@ -39,14 +39,14 @@ const exercisesData = [
         id: 'ej2_mejor_ajuste',
         type: 'select',
         title: 'Ejercicio 2: Particiones Variables con Mejor Ajuste (Best-Fit)',
-        question: 'Para el mismo estado con 8 huecos libres [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB] y la misma secuencia de solicitudes (a: 12 KB, b: 9 KB, c: 10 KB), ¿qué huecos se asignan respectivamente con Mejor Ajuste?',
+        question: 'Para el mismo estado con 8 huecos libres [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB] y la misma secuencia de solicitudes (a: 12 KB, b: 9 KB, c: 10 KB). Si se aplica Mejor Ajuste, ¿de qué huecos originales se realizará cada asignación, considerando que el espacio remanente de un hueco continúa disponible?',
         biblio: 'Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19',
         labRef: { id: 'alloc-simulator', name: 'Laboratorio 1: Asignación Continua', badge: '🧪 Lab 1: Particiones Variables' },
         labHint: 'En el Simulador 1, cambia la estrategia a "Mejor Ajuste (Best-Fit)" y reinicia la simulación para comprobar qué huecos mínimos albergan exactamente a cada solicitud.',
         options: [
-            { value: 'h12_h9_h10', label: 'a en hueco 12 KB, b en hueco 9 KB y c en hueco 10 KB' },
             { value: 'h20_h10_h12', label: 'a en hueco 20 KB, b en hueco 10 KB y c en hueco 12 KB' },
             { value: 'h20_h18_h15', label: 'a en hueco 20 KB, b en hueco 18 KB y c en hueco 15 KB' },
+            { value: 'h12_h9_h10', label: 'a en hueco 12 KB, b en hueco 9 KB y c en hueco 10 KB' },
             { value: 'h7_h5_h9', label: 'a en hueco 7 KB, b en hueco 5 KB y c en hueco 9 KB' }
         ]
     },
@@ -54,7 +54,7 @@ const exercisesData = [
         id: 'ej3_peor_ajuste',
         type: 'radio',
         title: 'Ejercicio 3: Particiones Variables con Peor Ajuste (Worst-Fit)',
-        question: 'Para la misma secuencia de huecos [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB] y solicitudes sucesivas (a: 12 KB, b: 9 KB, c: 10 KB), ¿qué huecos se asignan respectivamente con Peor Ajuste?',
+        question: 'Para la misma secuencia de huecos [20 KB, 7 KB, 10 KB, 12 KB, 5 KB, 9 KB, 15 KB, 18 KB] y solicitudes sucesivas (a: 12 KB, b: 9 KB, c: 10 KB). Si se aplica Peor Ajuste, ¿de qué huecos originales se realizará cada asignación, considerando que el espacio remanente de un hueco continúa disponible?',
         biblio: 'Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19',
         labRef: { id: 'alloc-simulator', name: 'Laboratorio 1: Asignación Continua', badge: '🧪 Lab 1: Particiones Variables' },
         labHint: 'En el Simulador 1, selecciona "Peor Ajuste (Worst-Fit)" para verificar cómo el algoritmo selecciona siempre el hueco más grande disponible en cada turno.',
@@ -69,15 +69,15 @@ const exercisesData = [
         id: 'ej4_buddy_system',
         type: 'select',
         title: 'Ejercicio 4: Particionamiento Dinámico con Sistema del Compañero (Buddy System)',
-        question: 'En un sistema de compañeros (Buddy System) con un bloque inicial de memoria de 512 KB, se reciben solicitudes sucesivas de 12 KB, 9 KB y 10 KB. Dado que los bloques se particionan en potencias de 2 (2^k), ¿cuál es el tamaño mínimo de bloque asignado a cada solicitud?',
+        question: 'En un sistema de compañeros (Buddy System) con un bloque inicial de memoria de 512 KB, se reciben solicitudes sucesivas de 12 KB, 9 KB y 10 KB. En este ejercicio se supone que el tamaño mínimo de bloque permitido por el sistema es de 16 KB. Dado que los bloques se particionan en potencias de 2 (2^k), ¿cuál es el tamaño mínimo de bloque asignado a cada solicitud?',
         biblio: 'Tanenbaum Cap. 3.2 / Stallings Cap. 7.2',
         labRef: { id: 'buddy-simulator', name: 'Laboratorio 2: Buddy System', badge: '🧪 Lab 2: Buddy System' },
-        labHint: 'En el Simulador 2, observa las divisiones del bloque de 512 KB al asignar P1 (12 KB), P2 (9 KB) y P3 (10 KB). Comprueba que todas requieren un bloque mínimo de potencia de dos: 16 KB.',
+        labHint: 'En el Simulador 2, observa las divisiones del bloque de 512 KB al asignar P1 (12 KB), P2 (9 KB) y P3 (10 KB). Comprueba que, bajo la cota mínima del sistema, todas reciben bloques de 16 KB.',
         options: [
-            { value: '16kb', label: '16 KB para cada una de las solicitudes' },
             { value: '32kb', label: '32 KB para cada una de las solicitudes' },
             { value: '8kb', label: '8 KB para cada una de las solicitudes' },
-            { value: '64kb', label: '64 KB para cada una de las solicitudes' }
+            { value: '64kb', label: '64 KB para cada una de las solicitudes' },
+            { value: '16kb', label: '16 KB para cada una de las solicitudes' }
         ]
     },
     {
@@ -87,10 +87,10 @@ const exercisesData = [
         question: 'Considere un espacio de direcciones lógico de 16 páginas de 512 KB cada una, mapeado sobre una memoria física compuesta por 8 marcos. ¿Cuántos bits componen una dirección lógica y una física respectivamente?',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 33',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'En el panel "Desglose Binario por Hardware" del Simulador 3, analiza cómo los bits de la dirección se dividen entre número de página virtual y desplazamiento (offset).',
+        labHint: 'En el apartado "Desglose en MMU" del Simulador 3, analiza cómo los bits de la dirección se dividen entre número de página virtual y desplazamiento (offset).',
         options: [
-            { value: '23_22', label: '23 bits de dirección lógica y 22 bits de dirección física' },
             { value: '24_20', label: '24 bits de dirección lógica y 20 bits de dirección física' },
+            { value: '23_22', label: '23 bits de dirección lógica y 22 bits de dirección física' },
             { value: '20_19', label: '20 bits de dirección lógica y 19 bits de dirección física' },
             { value: '32_24', label: '32 bits de dirección lógica y 24 bits de dirección física' }
         ]
@@ -102,7 +102,7 @@ const exercisesData = [
         question: 'Para un sistema con páginas de 4 KB (4096 bytes), calcule el número de página virtual y el desplazamiento correspondientes a la dirección decimal 20000 generada por el procesador:',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 32-33',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'En el Simulador 3, ingresa Dirección Lógica = 20000 con tamaño de página 4096 (4 KB) o pulsa el botón rápido "DL = 20000" para ver el cálculo directo de p y d.',
+        labHint: 'Ingresa manualmente Dirección Lógica = 20000 con tamaño de página 4096 (4 KB) y pulsa el botón de traducción para ver el cálculo directo de p y d.',
         options: [
             { value: 'p4_d3616', label: 'Página virtual 4 y desplazamiento 3616' },
             { value: 'p5_d1024', label: 'Página virtual 5 y desplazamiento 1024' },
@@ -117,11 +117,11 @@ const exercisesData = [
         question: 'Para un sistema con páginas de 4 KB (4096 bytes), calcule el número de página virtual y el desplazamiento correspondientes a la dirección decimal 32768:',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 32-33',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'En el Simulador 3, escribe 32768 en la Dirección Lógica o pulsa "DL = 32768" para observar cómo 32768 / 4096 resulta exactamente en página 8 con residuo 0.',
+        labHint: 'Ingresa manualmente Dirección Lógica = 32768 y pulsa el botón de traducción para observar cómo 32768 / 4096 resulta exactamente en página 8 con residuo 0.',
         options: [
-            { value: 'p8_d0', label: 'Página virtual 8 y desplazamiento 0' },
             { value: 'p7_d4095', label: 'Página virtual 7 y desplazamiento 4095' },
             { value: 'p8_d1024', label: 'Página virtual 8 y desplazamiento 1024' },
+            { value: 'p8_d0', label: 'Página virtual 8 y desplazamiento 0' },
             { value: 'p9_d0', label: 'Página virtual 9 y desplazamiento 0' }
         ]
     },
@@ -129,43 +129,43 @@ const exercisesData = [
         id: 'ej8_tabla_paginas_traduccion',
         type: 'radio',
         title: 'Ejercicio 8: Traducción con Tabla de Páginas y Detección de Fallo de Página',
-        question: 'Un proceso de 56 KB con páginas de 4 KB tiene en su tabla: Pág 0 en Marco 1 (Presencia 1), Pág 1 con Presencia 0 (en disco), Pág 3 en Marco 3, Pág 4 en Marco 2, Pág 6 en Marco 0. Al intentar traducir la dirección virtual decimal 4100 (Pág 1, Disp 4), ¿qué ocurre?',
+        question: 'Un proceso de 56 KB con páginas de 4 KB tiene en su tabla: Pág 0 en Marco 1 (Presencia 1), Pág 1 con bit de presencia 0, por lo que no se encuentra actualmente en memoria principal, Pág 3 en Marco 3, Pág 4 en Marco 2, Pág 6 en Marco 0. Al intentar traducir la dirección virtual decimal 4100 (Pág 1, Disp 4), ¿qué ocurre?',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 35',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'En el Simulador 3, pulsa el botón rápido "DL = 4100". Observa en la Tabla de Páginas que la Pág 1 tiene Bit de Presencia = 0 (Swap) y la MMU dispara un Fallo de Página.',
+        labHint: 'Ingresa manualmente Dirección Lógica = 4100 y pulsa el botón de traducción. Observa en la Tabla de Páginas que la Pág 1 tiene Bit de Presencia = 0 (no se encuentra en memoria principal) y la MMU reporta una Excepción por fallo de página.',
         options: [
-            { value: 'fallo_pagina_no_cargada', label: 'No hay correspondencia física porque la página no está cargada (Fallo de página)' },
             { value: 'direccion_fisica_directa', label: 'La MMU accede directamente al marco 1 sumando el desplazamiento 4' },
             { value: 'violacion_segmento', label: 'Se produce una trampa por violación de límite de segmento en el hardware' },
-            { value: 'compactacion_automatica', label: 'El sistema operativo compacta la memoria física antes de traducir' }
+            { value: 'compactacion_automatica', label: 'El sistema operativo compacta la memoria física antes de traducir' },
+            { value: 'fallo_pagina_no_cargada', label: 'No hay correspondencia física porque la página no se encuentra actualmente en memoria principal (Excepción por fallo de página)' }
         ]
     },
     {
         id: 'ej9_segmentacion_traduccion',
         type: 'select',
         title: 'Ejercicio 9: Traducción de Direcciones en Segmentación Pura (Segmento 2, Offset 10)',
-        question: 'Dada la tabla de segmentos con Seg 0 (Base: 150, Límite: 250), Seg 1 (Base: 650, Límite: 180), Seg 2 (Base: 1024, Límite: 310), Seg 3 (Base: 410, Límite: 200), Seg 4 (Base: 850, Límite: 110). Calcule la dirección física equivalente a la dirección lógica dupla (2, 10):',
+        question: 'Dada la tabla de segmentos con valores expresados en unidades direccionables (bytes): Seg 0 (Base: 150, Límite: 250), Seg 1 (Base: 650, Límite: 180), Seg 2 (Base: 1024, Límite: 310), Seg 3 (Base: 410, Límite: 200), Seg 4 (Base: 850, Límite: 110). Calcule la dirección física equivalente a la dirección lógica dupla (2, 10), donde el desplazamiento también se expresa en bytes:',
         biblio: 'Silberschatz Cap. 8.6 / Diapositivas U6 pág. 38',
         labRef: { id: 'seg-simulator', name: 'Laboratorio 4: Segmentación MMU', badge: '🧪 Lab 4: Segmentación MMU' },
-        labHint: 'En el Simulador 4, selecciona el botón rápido "(2, 10)". La MMU comprueba 10 < 310 (válido) y calcula Dirección Física = Base(1024) + 10 = 1034.',
+        labHint: 'Ingresa manualmente Segmento = 2, Desplazamiento = 10 y pulsa el botón de validación. La MMU comprueba 10 < 310 (válido) y calcula Dirección Física = Base(1024) + 10 = 1034 bytes.',
         options: [
-            { value: '1034', label: 'Dirección física 1034' },
-            { value: '1334', label: 'Dirección física 1334' },
-            { value: '1014', label: 'Dirección física 1014' },
-            { value: '320', label: 'Dirección física 320' }
+            { value: '1334', label: 'Dirección física 1334 bytes' },
+            { value: '1034', label: 'Dirección física 1034 bytes' },
+            { value: '1014', label: 'Dirección física 1014 bytes' },
+            { value: '320', label: 'Dirección física 320 bytes' }
         ]
     },
     {
         id: 'ej10_segmentacion_violacion',
         type: 'switch',
         title: 'Ejercicio 10: Validación de Límites y Trampa de Hardware en Segmentación',
-        question: 'Dada la tabla de segmentos donde el Segmento 1 tiene Base: 650 y Límite: 180. ¿Qué acción emprende la MMU al solicitar la dirección lógica (1, 371)?',
+        question: 'Dada la tabla de segmentos donde los valores se expresan en unidades direccionables (bytes) y el Segmento 1 tiene Base: 650 bytes y Límite: 180 bytes. ¿Qué acción emprende la MMU al solicitar la dirección lógica (1, 371), con desplazamiento de 371 bytes?',
         biblio: 'Silberschatz Cap. 8.6 / Diapositivas U6 pág. 38',
         labRef: { id: 'seg-simulator', name: 'Laboratorio 4: Segmentación MMU', badge: '🧪 Lab 4: Segmentación MMU' },
-        labHint: 'En el Simulador 4, pulsa el botón rápido "(1, 371)". Dado que el desplazamiento 371 supera el límite de 180 del Segmento 1, la MMU dispara un Trap por Segmentation Fault.',
+        labHint: 'Ingresa manualmente Segmento = 1, Desplazamiento = 371 y pulsa el botón de validación. Dado que el desplazamiento 371 supera el límite de 180 del Segmento 1, la MMU dispara un Trap por violación de límite (Segmentation Fault).',
         options: [
-            { value: 'violacion_limite_trap', label: 'Trap por violación de límite (desplazamiento 371 supera el límite de 180)' },
-            { value: 'traduccion_correcta_1021', label: 'Se accede a la dirección física 1021 sumando la base al desplazamiento' },
+            { value: 'violacion_limite_trap', label: 'Trap por violación de límite (desplazamiento 371 bytes supera el límite de 180 bytes)' },
+            { value: 'traduccion_correcta_1021', label: 'Se accede a la dirección física 1021 bytes sumando la base al desplazamiento' },
             { value: 'reasignacion_segmento', label: 'El proceso es reubicado dinámicamente al segmento de datos contiguo' },
             { value: 'paginacion_demanda', label: 'La CPU carga una nueva página desde el área de intercambio de swap' }
         ]
@@ -174,15 +174,15 @@ const exercisesData = [
         id: 'ej11_regla_cincuenta',
         type: 'radio',
         title: 'Ejercicio 11: Análisis Estadístico de Fragmentación (Regla del 50%)',
-        question: 'Según el análisis de Donald Knuth para particiones variables con Primer Ajuste en estado estacionario, si existen N procesos cargados, ¿qué proporción del total de bloques de memoria representan los huecos libres?',
+        question: 'Según la regla del 50 % para particiones variables con Primer Ajuste, si existen N procesos cargados, ¿aproximadamente cuántos huecos libres se generan y qué proporción representan respecto del total de bloques, considerando procesos y huecos?',
         biblio: 'Silberschatz Cap. 8.3 / Diapositivas U6 pág. 25-26',
         labRef: { id: 'alloc-simulator', name: 'Laboratorio 1: Asignación Continua', badge: '🧪 Lab 1: Particiones Variables' },
-        labHint: 'Revisa el Laboratorio 1 tras realizar múltiples asignaciones y liberaciones con Primer Ajuste: la fragmentación externa genera aproximadamente N/2 huecos para N procesos en memoria.',
+        labHint: 'Revisa el Laboratorio 1 tras realizar múltiples asignaciones y liberaciones con Primer Ajuste: la fragmentación externa genera aproximadamente N/2 huecos para N procesos en memoria, representando cerca de un tercio del total de bloques.',
         options: [
-            { value: 'un_tercio', label: 'Aproximadamente un tercio del total de particiones de memoria' },
-            { value: 'la_mitad', label: 'Exactamente la mitad de la memoria física total instalada' },
-            { value: 'una_cuarta_parte', label: 'Una cuarta parte del espacio físico de direcciones del núcleo' },
-            { value: 'el_diez_por_ciento', label: 'Menos del diez por ciento debido al ordenamiento por listas' }
+            { value: 'la_mitad', label: 'Se generan aproximadamente N huecos, equivalentes a la mitad del total de bloques' },
+            { value: 'una_cuarta_parte', label: 'Se generan aproximadamente N/4 huecos, equivalentes a una cuarta parte del total de bloques' },
+            { value: 'un_tercio', label: 'Se generan aproximadamente N/2 huecos, equivalentes a cerca de un tercio del total de bloques' },
+            { value: 'el_diez_por_ciento', label: 'Se generan menos de N/10 huecos, equivalentes a menos del diez por ciento del total de bloques' }
         ]
     },
     {
@@ -194,8 +194,8 @@ const exercisesData = [
         labRef: { id: 'seg-simulator', name: 'Laboratorio 4: Segmentación MMU', badge: '🧪 Lab 4: Segmentación MMU' },
         labHint: 'Observa la integración conceptual entre el Laboratorio 3 y 4: al paginar cada segmento, cada uno de ellos se divide en páginas de tamaño fijo (8 KB / 1 KB = 8 páginas por segmento).',
         options: [
-            { value: '8_paginas', label: '8 páginas por cada segmento' },
             { value: '16_paginas', label: '16 páginas por cada segmento' },
+            { value: '8_paginas', label: '8 páginas por cada segmento' },
             { value: '4_paginas', label: '4 páginas por cada segmento' },
             { value: '32_paginas', label: '32 páginas por cada segmento' }
         ]
@@ -263,7 +263,16 @@ function setActiveSceneBtn(id) {
     });
 }
 
+function enableAllocStepBtn() {
+    const stepBtn = document.getElementById('btn-alloc-step');
+    if (stepBtn) {
+        stepBtn.disabled = false;
+        stepBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+}
+
 function loadSceneTP() {
+    enableAllocStepBtn();
     // 8 huecos libres ordenados por dirección: 20KB, 7KB, 10KB, 12KB, 5KB, 9KB, 15KB, 18KB (Total = 96 KB)
     const rawSizes = [20, 7, 10, 12, 5, 9, 15, 18];
     allocMemory = rawSizes.map((tam, idx) => ({
@@ -285,6 +294,7 @@ function loadSceneTP() {
 }
 
 function loadSceneFrag() {
+    enableAllocStepBtn();
     // Escenario de Fragmentación Externa: muchos huecos pequeños de 6KB, 8KB, 5KB
     allocMemory = [
         { id: 'P_A', tipo: 'P', tam: 30, originalTam: 30, procId: 'P_A', color: '#64748b' },
@@ -305,6 +315,7 @@ function loadSceneFrag() {
 }
 
 function compactMemory() {
+    enableAllocStepBtn();
     const totalHueco = allocMemory.filter(b => b.tipo === 'H').reduce((acc, b) => acc + b.tam, 0);
     const procs = allocMemory.filter(b => b.tipo === 'P');
     allocMemory = [...procs];
@@ -374,7 +385,6 @@ function stepAlloc() {
             const idx = (allocNextFitLastIdx + offset) % n;
             if (allocMemory[idx].tipo === 'H' && allocMemory[idx].tam >= sol) {
                 targetIdx = idx;
-                allocNextFitLastIdx = idx;
                 break;
             }
         }
@@ -385,7 +395,7 @@ function stepAlloc() {
         const remanente = huecoElegido.tam - sol;
         const color = getProcColor(allocCurrentStep);
 
-        logAlloc(`✅ [${algo.toUpperCase()}] ${procName} asignado al hueco ${huecoElegido.id} (${huecoElegido.tam} KB). Desperdicio residual: ${remanente} KB.`);
+        logAlloc(`✅ [${algo.toUpperCase()}] ${procName} asignado al hueco ${huecoElegido.id} (${huecoElegido.tam} KB). Hueco residual libre: ${remanente} KB.`);
 
         const nuevoProc = {
             id: procId,
@@ -401,6 +411,7 @@ function stepAlloc() {
 
         if (remanente === 0) {
             allocMemory[targetIdx] = nuevoProc;
+            allocNextFitLastIdx = (targetIdx + 1) % allocMemory.length;
         } else {
             const nuevoHueco = {
                 id: `${huecoElegido.id}'`,
@@ -414,11 +425,19 @@ function stepAlloc() {
                 originalHoleTam: huecoElegido.tam
             };
             allocMemory.splice(targetIdx, 1, nuevoProc, nuevoHueco);
+            // La búsqueda posterior continúa desde la posición inmediatamente posterior a la asignación (el hueco residual generado)
+            allocNextFitLastIdx = (targetIdx + 1) % allocMemory.length;
         }
 
         allocCurrentStep++;
     } else {
-        logAlloc(`❌ ERROR: ${procName} NO cabe en ningún hueco disponible. ¡Fragmentación externa!`);
+        logAlloc(`❌ Solicitud rechazada: ${procName} NO cabe en ningún hueco disponible. ¡Fragmentación externa!`);
+        allocCurrentStep++;
+        const stepBtn = document.getElementById('btn-alloc-step');
+        if (stepBtn && allocCurrentStep >= allocRequests.length) {
+            stepBtn.disabled = true;
+            stepBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
     }
 
     const stepEl = document.getElementById('alloc-step-num');
@@ -465,7 +484,7 @@ function renderMemoryBar() {
             div.style.borderTop = `2px dashed ${procCol}`;
             div.style.borderBottom = `2px dashed ${procCol}`;
             div.style.borderRight = `2px dashed ${procCol}`;
-            div.setAttribute('title', `Hueco Residual ${block.id} (${block.tam} KB): Desperdicio dejado por ${block.fromProc} al ocupar ${block.originalHole} (${block.originalHoleTam} KB).`);
+            div.setAttribute('title', `Hueco Residual ${block.id} (${block.tam} KB): Hueco residual libre dejado por ${block.fromProc} al ocupar ${block.originalHole} (${block.originalHoleTam} KB).`);
 
             if (block.tam >= 5) {
                 div.innerHTML = `
@@ -578,7 +597,7 @@ function updateResidualsPanel() {
                             Espacio Residual (${resId}):
                         </span>
                         <strong class="${resTam > 0 ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-emerald-600 dark:text-emerald-400 font-bold'}">
-                            ${resTam} KB ${resTam > 0 ? `(${pctDesp}% desp.)` : '(Exacto)'}
+                            ${resTam} KB ${resTam > 0 ? `(${pctDesp}% remanente)` : '(Exacto)'}
                         </strong>
                     </div>
                 </div>
@@ -594,11 +613,11 @@ function updateResidualsPanel() {
         <div class="p-3.5 bg-gray-50/80 dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
-                    <span>📊</span> Auditoría de Desperdicio Residual por Proceso
+                    <span>📊</span> Auditoría de Huecos Residuales Libres por Proceso
                 </span>
                 <span class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">
                     Asignado: <strong class="text-blue-600 dark:text-blue-400">${totalAlloc} KB</strong> | 
-                    Residual: <strong class="text-amber-600 dark:text-amber-400">${totalRes} KB</strong> | 
+                    Residual Libre: <strong class="text-amber-600 dark:text-amber-400">${totalRes} KB</strong> | 
                     Huecos Intactos: <strong class="text-emerald-600 dark:text-emerald-400">${totalIntact} KB</strong>
                 </span>
             </div>
@@ -612,11 +631,12 @@ function updateResidualsPanel() {
 function updateAllocBadges(estado) {
     const free = allocMemory.filter(b => b.tipo === 'H').reduce((acc, b) => acc + b.tam, 0);
     const holes = allocMemory.filter(b => b.tipo === 'H').length;
+    const largestHole = Math.max(0, ...allocMemory.filter(b => b.tipo === 'H').map(b => b.tam));
 
     document.getElementById('badge-alloc-status').textContent = `Estado: ${estado}`;
     document.getElementById('badge-alloc-free').textContent = `Libre: ${free} KB`;
     document.getElementById('badge-alloc-holes').textContent = `Huecos: ${holes}`;
-    document.getElementById('badge-alloc-frag').textContent = `Frag. Externa: ${free} KB`;
+    document.getElementById('badge-alloc-frag').textContent = `Libre total: ${free} KB | Mayor hueco: ${largestHole} KB`;
 }
 
 function logAlloc(msg) {
@@ -927,15 +947,30 @@ function renderPagingTable() {
         tr.innerHTML = `
             <td><strong>Pág ${p}</strong></td>
             <td>${entry.presente ? 'Marco ' + entry.marco : '<span class="text-gray-400">-</span>'}</td>
-            <td>${entry.presente ? '<span class="text-emerald-500 font-bold">1 (RAM)</span>' : '<span class="text-rose-500 font-bold">0 (Swap)</span>'}</td>
+            <td>${entry.presente ? '<span class="text-emerald-500 font-bold">1 (RAM)</span>' : '<span class="text-rose-500 font-bold">0 (Ausente de RAM)</span>'}</td>
         `;
         tbody.appendChild(tr);
     }
 }
 
 function translatePaging() {
-    const dl = parseInt(document.getElementById('paging-dl-input').value) || 0;
+    const rawVal = document.getElementById('paging-dl-input').value.trim();
+    const dl = Number(rawVal);
     const tamPag = parseInt(document.getElementById('paging-size-select').value) || 4096;
+    const resultBox = document.getElementById('paging-result-box');
+
+    if (!Number.isInteger(dl) || dl < 0) {
+        document.getElementById('mmu-dl-disp').textContent = rawVal || 'Inválido';
+        document.getElementById('mmu-page-disp').textContent = '-';
+        document.getElementById('mmu-offset-disp').textContent = '-';
+        document.getElementById('mmu-binary-disp').innerHTML = '<span class="text-rose-500 font-bold">Dirección Lógica inválida (debe ser un entero ≥ 0)</span>';
+        resultBox.className = 'p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 text-sm';
+        document.getElementById('paging-result-status').innerHTML = '❌ Dirección Inválida';
+        document.getElementById('paging-res-frame').textContent = '-';
+        document.getElementById('paging-res-calc').textContent = 'La dirección lógica debe ser un entero no negativo (≥ 0)';
+        document.getElementById('paging-res-df').textContent = 'Error de MMU';
+        return;
+    }
 
     const p = Math.floor(dl / tamPag);
     const d = dl % tamPag;
@@ -951,15 +986,14 @@ function translatePaging() {
     const binD = binTotal.slice(binTotal.length - bitsDisp);
     document.getElementById('mmu-binary-disp').innerHTML = `<span class="text-blue-500 font-bold">${binP}</span> <span class="text-emerald-500 font-bold">${binD}</span>`;
 
-    const resultBox = document.getElementById('paging-result-box');
     const entry = officialPageTable[p];
 
     if (!entry || !entry.presente) {
         resultBox.className = 'p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 text-sm';
-        document.getElementById('paging-result-status').innerHTML = '❌ Fallo de Página (Page Fault)';
-        document.getElementById('paging-res-frame').textContent = 'No presente en RAM';
-        document.getElementById('paging-res-calc').textContent = `La página ${p} está en disco (Presencia = 0)`;
-        document.getElementById('paging-res-df').textContent = 'Interrupción Trap';
+        document.getElementById('paging-result-status').innerHTML = '❌ Excepción por fallo de página (Page Fault)';
+        document.getElementById('paging-res-frame').textContent = 'No presente en memoria principal';
+        document.getElementById('paging-res-calc').textContent = `La página ${p} tiene bit de presencia 0 (ausente en memoria principal)`;
+        document.getElementById('paging-res-df').textContent = 'Excepción por fallo de página';
     } else {
         resultBox.className = 'p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-sm';
         const df = (entry.marco * tamPag) + d;
@@ -991,13 +1025,24 @@ window.loadSegSample = function(s, d) {
 };
 
 function translateSegmentation() {
-    const s = parseInt(document.getElementById('seg-num-input').value);
-    const d = parseInt(document.getElementById('seg-offset-input').value);
+    const rawS = document.getElementById('seg-num-input').value.trim();
+    const rawD = document.getElementById('seg-offset-input').value.trim();
+    const s = Number(rawS);
+    const d = Number(rawD);
 
     const badge = document.getElementById('seg-status-badge');
     const compEl = document.getElementById('seg-comp');
     const calcEl = document.getElementById('seg-calc');
     const dfEl = document.getElementById('seg-final-df');
+
+    if (!Number.isInteger(s) || s < 0 || !Number.isInteger(d) || d < 0) {
+        badge.className = 'badge danger text-sm text-center py-2';
+        badge.textContent = '❌ Parámetros Inválidos (Deben ser enteros ≥ 0)';
+        compEl.innerHTML = '<span class="text-rose-500 font-bold">El segmento y desplazamiento deben ser enteros no negativos (≥ 0)</span>';
+        calcEl.textContent = 'Acceso bloqueado por hardware';
+        dfEl.textContent = 'Excepción de Dirección Inválida';
+        return;
+    }
 
     const seg = officialSegmentTable[s];
 
@@ -1010,7 +1055,7 @@ function translateSegmentation() {
         return;
     }
 
-    if (d >= seg.limite) {
+    if (!Number.isInteger(d) || d < 0 || d >= seg.limite) {
         badge.className = 'badge danger text-sm text-center py-2';
         badge.textContent = '💥 Trap: Segmentation Fault (Violación de Límite)';
         compEl.innerHTML = `<span class="text-rose-500 font-bold">${d} &ge; ${seg.limite} (DESPLAZAMIENTO EXCEDE EL LÍMITE)</span>`;

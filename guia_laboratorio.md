@@ -50,6 +50,7 @@ Esta guía te explica detalladamente:
      - *Búsqueda:* Comienza desde el inicio. El residuo de 8 KB no alcanza; el hueco de 7 KB no alcanza; el residuo de 1 KB no alcanza; el siguiente hueco disponible es de **12 KB** ($10 \le 12$).
      - *Qué observar:* P3 se ubica en el hueco 3 de 12 KB, dejando un residuo de **2 KB**.
 3. **Conclusión y Validación:**
+   - ¿De qué huecos originales se realizará cada asignación, considerando que el espacio remanente de un hueco continúa disponible?
    - Huecos utilizados respectivamente: **Hueco 20 KB, Hueco 10 KB y Hueco 12 KB**.
    - ✅ *Esta secuencia es la respuesta correcta del **Ejercicio 1***.
 
@@ -67,7 +68,7 @@ Esta guía te explica detalladamente:
      - **P2 (9 KB):** Recorre la lista y encuentra el hueco 5 de **9 KB exactos** ($9 - 9 = 0$). Lo asigna allí.
      - **P3 (10 KB):** Recorre la lista y encuentra el hueco 2 de **10 KB exactos** ($10 - 10 = 0$). Lo asigna allí.
 3. **Qué notar:**
-   - Observa el panel de residuos: en este caso excepcional del TP, Best-Fit logra un **desperdicio residual de 0 KB** en los tres casos porque existían huecos del tamaño exacto.
+   - Observa el panel de residuos: en este caso excepcional del TP, Best-Fit logra un **hueco residual libre de 0 KB** en los tres casos porque existían huecos del tamaño exacto.
    - Huecos utilizados: **Hueco 12 KB, Hueco 9 KB y Hueco 10 KB**.
    - ✅ *Esta secuencia es la respuesta correcta del **Ejercicio 2***.
 
@@ -85,7 +86,7 @@ Esta guía te explica detalladamente:
      - **P2 (9 KB):** El hueco más grande disponible ahora es el último, de **18 KB** (deja 9 KB).
      - **P3 (10 KB):** El siguiente más grande es el de **15 KB** (deja 5 KB).
 3. **Qué notar:**
-   - Los huecos residuales que quedan (8 KB, 9 KB y 5 KB) son significativamente más grandes que en Best-Fit.
+   - Los huecos residuales libres que quedan (8 KB, 9 KB y 5 KB) son significativamente más grandes que en Best-Fit.
    - Huecos utilizados: **Hueco 20 KB, Hueco 18 KB y Hueco 15 KB**.
    - ✅ *Esta secuencia es la respuesta correcta del **Ejercicio 3***.
 
@@ -95,12 +96,12 @@ Esta guía te explica detalladamente:
 1. **Procedimiento:**
    - Selecciona el botón **`💥 2. Fragmentación Externa Severa`**.
    - Observa la barra de memoria: hay múltiples huecos de 4 KB y 6 KB intercalados con procesos.
-   - Nota el badge **Frag. Externa**: marca memoria libre suficiente para un proceso grande, pero ningún hueco individual puede albergarlo.
+   - Nota el indicador **Libre total | Mayor hueco**: marca memoria libre suficiente para un proceso grande, pero ningún hueco individual puede albergarlo (fragmentación externa).
    - Haz clic en **`🗜️ 3. Compactación de Memoria`**: observa cómo el sistema operativo reubica todos los procesos contiguamente hacia el inicio de la memoria, unificando todo el espacio libre en un único gran bloque.
 2. **Qué notar teóricamente:**
    - Donald Knuth demostró formalmente que en particiones variables con First-Fit, si hay $N$ procesos asignados en estado estable, el número de huecos libres tiende a $N/2$ (la mitad de huecos que de procesos).
-   - Por ende, los huecos libres representan aproximadamente **un tercio** del total de particiones (procesos + huecos: $\frac{0.5N}{N + 0.5N} = \frac{1}{3}$).
-   - ✅ *Este principio analítico resuelve el **Ejercicio 11***.
+   - Por ende, los huecos libres representan aproximadamente **un tercio** del total de bloques (procesos + huecos: $\frac{0.5N}{N + 0.5N} = \frac{1}{3}$).
+   - ✅ *Este principio analítico resuelve el **Ejercicio 11**: ante $N$ procesos cargados, se generan aproximadamente $N/2$ huecos libres, equivalentes a cerca de un tercio del total de bloques.*
 
 ---
 
@@ -132,6 +133,7 @@ $$2^{k-1} < x \le 2^k$$
      - *Qué ocurre:* $8 < 10 \le 16$. Toma el compañero contiguo libre de 32 KB, lo divide en dos de 16 KB y aloja a P3.
      - *Qué observar:* La fragmentación interna aumenta en $16 - 10 = 6\text{ KB}$.
 3. **Conclusión y Validación:**
+   - En este ejercicio se supone que el tamaño mínimo de bloque permitido por el sistema es de 16 KB (el simulador adopta esta cota inferior para ilustrar la fragmentación interna representativa).
    - Para las tres solicitudes (12 KB, 9 KB y 10 KB), el tamaño de bloque asignado es invariablemente **16 KB**.
    - ✅ *Esta observación resuelve el **Ejercicio 4***.
 
@@ -160,10 +162,10 @@ $$2^{k-1} < x \le 2^k$$
 **Ejercicios asociados:** **Ejercicio 5**, **Ejercicio 6**, **Ejercicio 7** y **Ejercicio 8**.
 
 ### 📋 Arquitectura del Simulador
-- **Tamaño de página:** $4\text{ KB} = 4096\text{ bytes} \implies 12\text{ bits}$ para el desplazamiento ($d$).
-- **Tabla de páginas oficial del proceso (56 KB = 14 páginas):**
+- **Tamaño de página:** $4\text{ KB} = 4096\text{ bytes} \implies 12\text{ bits}$ para el desplazamiento ($d$) (fijo según el fragmento de tabla del proceso).
+- **Fragmento de la tabla de páginas del proceso, páginas 0 a 7 (proceso de 56 KB = 14 páginas):**
   - Página 0 $\to$ Marco 1 (Presencia = 1)
-  - Página 1 $\to$ **Presencia = 0 (en disco / Swap)**
+  - Página 1 $\to$ **Presencia = 0 (bit de presencia 0, por lo que no se encuentra actualmente en memoria principal)**
   - Página 2 $\to$ Presencia = 0
   - Página 3 $\to$ Marco 3 (Presencia = 1)
   - Página 4 $\to$ Marco 2 (Presencia = 1)
@@ -173,14 +175,14 @@ $$2^{k-1} < x \le 2^k$$
 
 ### 🧪 Experimento 3.1: Desglose Matemático y Binario para $\text{DL} = 20000$
 1. **Configuración y Valores:**
-   - En **Dirección Lógica (Decimal)**, ingresa: `20000`.
-   - En **Tamaño de Página**, selecciona: `4 KB (4096 bytes - 12 bits disp)`.
+   - En **Dirección Lógica (Decimal)**, ingresa manualmente: `20000`.
+   - En **Tamaño de Página**, nota que está fijado en: `4 KB (4096 bytes - Fijo según tabla de proceso)`.
    - Haz clic en **`🔍 Traducir Dirección`**.
 2. **Qué observar en pantalla:**
    - **Cálculo de la MMU:**
      $$p = \lfloor 20000 / 4096 \rfloor = \mathbf{4}$$
      $$d = 20000 \pmod{4096} = 20000 - (4 \times 4096) = \mathbf{3616}$$
-   - **Desglose Binario por Hardware:**
+   - **Desglose en MMU:**
      - En el visor binario verás: `<span class="text-blue-500">00000100</span> <span class="text-emerald-500">111000100000</span>`.
      - Los 12 bits bajos en verde son el desplazamiento: $111000100000_2 = 3616_{10}$.
      - Los bits altos en azul son la página: $00000100_2 = 4_{10}$.
@@ -195,7 +197,7 @@ $$2^{k-1} < x \le 2^k$$
 
 ### 🧪 Experimento 3.2: Límite Exacto de Página para $\text{DL} = 32768$
 1. **Valores a Probar:**
-   - Ingresa Dirección Lógica: `32768`. Presiona **`🔍 Traducir Dirección`**.
+   - Ingresa manualmente la Dirección Lógica: `32768`. Presiona **`🔍 Traducir Dirección`**.
 2. **Qué observar:**
    - $p = 32768 / 4096 = \mathbf{8}$.
    - $d = 32768 \pmod{4096} = \mathbf{0}$.
@@ -208,16 +210,16 @@ $$2^{k-1} < x \le 2^k$$
 
 ### 🧪 Experimento 3.3: Detección por Hardware de Fallo de Página ($\text{DL} = 4100$)
 1. **Valores a Probar:**
-   - Ingresa Dirección Lógica: `4100`. Presiona **`🔍 Traducir Dirección`**.
+   - Ingresa manualmente la Dirección Lógica: `4100`. Presiona **`🔍 Traducir Dirección`**.
 2. **Qué observar:**
    - $p = \lfloor 4100 / 4096 \rfloor = \mathbf{1}$, $d = 4100 - 4096 = \mathbf{4}$.
    - La MMU consulta la tabla en la entrada `Pág 1`.
-   - La columna de presencia indica: `0 (Swap)`.
+   - La columna de presencia indica: `0 (Ausente de RAM)`.
    - El panel de resultado cambia a color **rojo**:
-     `❌ Fallo de Página (Page Fault): La página 1 está en disco (Presencia = 0). Interrupción Trap.`
-   - La MMU **no calcula dirección física**, sino que suspende la instrucción y transfiere el control a la rutina del núcleo del sistema operativo para traer la página a RAM.
+     `❌ Excepción por fallo de página (Page Fault): La página 1 tiene bit de presencia 0 (ausente de RAM).`
+   - La MMU **no calcula dirección física**, sino que suspende la instrucción y genera una **excepción por fallo de página** (Page Fault Exception) transfiriendo el control a la rutina del núcleo del sistema operativo para cargar la página desde el almacenamiento secundario a RAM.
 3. **Validación:**
-   - No hay correspondencia física porque la página no está cargada.
+   - No hay correspondencia física porque la página no está cargada (Pág 1 con bit de presencia 0, por lo que no se encuentra actualmente en memoria principal).
    - ✅ *Resuelve el **Ejercicio 8***.
 
 ---
@@ -239,8 +241,10 @@ $$2^{k-1} < x \le 2^k$$
 **Ubicación en simulador:** Sección `#seg-simulator`  
 **Ejercicios asociados:** **Ejercicio 9**, **Ejercicio 10** y **Ejercicio 12**.
 
-### 📋 Tabla de Segmentos Oficial en RAM
-| Segmento ($s$) | Base Física | Límite (Tamaño máx.) |
+### 📋 Tabla de Segmentos Oficial en RAM (Unidades en Bytes)
+> ℹ️ **Nota sobre unidades:** Las bases físicas, límites, desplazamientos ($d$) y direcciones físicas ($\text{DF}$) se expresan en **unidades direccionables (bytes)**.
+
+| Segmento ($s$) | Base Física (bytes) | Límite / Tamaño máx. (bytes) |
 | :---: | :---: | :---: |
 | **0** | 150 | 250 |
 | **1** | 650 | 180 |
@@ -252,25 +256,25 @@ $$2^{k-1} < x \le 2^k$$
 
 ### 🧪 Experimento 4.1: Acceso Válido para la Dupla $(2, 10)$
 1. **Procedimiento:**
-   - Haz clic en el botón rápido **`Prueba (2, 10)`** de la tabla, o ingresa manualmente:
+   - Ingresa manualmente en los campos del simulador:
      - **Número de Segmento (S):** `2`
      - **Desplazamiento (d):** `10`
    - Presiona **`⚡ Validar Acceso MMU`**.
 2. **Qué observar en pantalla:**
-   - La MMU realiza la comparación de hardware:
+   - La MMU valida que el desplazamiento sea un entero no negativo ($d \ge 0$) y realiza la comparación de hardware:
      $$d < \text{Límite} \iff 10 < 310 \implies \mathbf{VERDADERO\ (Válido)}$$
    - El badge se muestra en verde: `✅ Acceso Válido por Hardware`.
    - Cálculo de la dirección física contigua:
-     $$\text{DF} = \text{Base} + d = 1024 + 10 = \mathbf{1034}$$
+     $$\text{DF} = \text{Base} + d = 1024 + 10 = \mathbf{1034}\text{ bytes}$$
 3. **Validación:**
-   - Dirección física calculada = 1034.
+   - Dirección física calculada = 1034 bytes.
    - ✅ *Resuelve el **Ejercicio 9***.
 
 ---
 
 ### 🧪 Experimento 4.2: Violación de Límite y Trap de Hardware para la Dupla $(1, 371)$
 1. **Procedimiento:**
-   - Haz clic en el botón rápido **`Prueba (1, 371) Trap`**, o ingresa:
+   - Ingresa manualmente en los campos del simulador:
      - **Número de Segmento (S):** `1`
      - **Desplazamiento (d):** `371`
    - Presiona **`⚡ Validar Acceso MMU`**.
@@ -282,9 +286,9 @@ $$2^{k-1} < x \le 2^k$$
      `💥 Trap: Segmentation Fault (Violación de Límite)`  
      `371 >= 180 (DESPLAZAMIENTO EXCEDE EL LÍMITE)`  
      `Hardware bloquea acceso a la memoria física: Excepción de Núcleo.`
-   - La MMU **bloquea físicamente las líneas del bus de direcciones**, impidiendo que un proceso corrompa segmentos ajenos.
+   - La MMU **bloquea físicamente las líneas del bus de direcciones**, impidiendo que un proceso corrompa segmentos ajenos (así como también rechaza desplazamientos negativos o no enteros que no cumplan $0 \le d < \text{Límite}$).
 3. **Validación:**
-   - Acción: Trap por violación de límite (desplazamiento 371 supera límite de 180).
+   - Acción: Trap por violación de límite (desplazamiento 371 bytes supera límite de 180 bytes).
    - ✅ *Resuelve el **Ejercicio 10***.
 
 ---
@@ -307,17 +311,17 @@ Utiliza esta tabla para verificar que completaste cada comprobación antes de en
 
 | N° | Ejercicio Evaluativo | Simulador a Utilizar | Valores a Ingresar / Probar | Resultado Esperado en el Simulador |
 | :-: | :--- | :--- | :--- | :--- |
-| **1** | Primer Ajuste | Lab 1 (Particiones) | Estrategia: First-Fit, 3 pasos | Asignación en huecos: `20 KB`, `10 KB`, `12 KB` |
-| **2** | Mejor Ajuste | Lab 1 (Particiones) | Estrategia: Best-Fit, 3 pasos | Asignación en huecos: `12 KB`, `9 KB`, `10 KB` |
-| **3** | Peor Ajuste | Lab 1 (Particiones) | Estrategia: Worst-Fit, 3 pasos | Asignación en huecos: `20 KB`, `18 KB`, `15 KB` |
-| **4** | Buddy System | Lab 2 (Buddy) | Escenario 2, P1(12), P2(9), P3(10) | Todos se asignan en bloques mínimos de `16 KB` |
-| **5** | Bits Lógicos/Físicos | Lab 3 (Paginación) | Panel binario y descomposición | `23 bits` lógicos y `22 bits` físicos |
-| **6** | Desglose DL 20000 | Lab 3 (Paginación) | DL = `20000`, TamPág = `4096` | Página virtual `4`, Desplazamiento `3616` |
-| **7** | Desglose DL 32768 | Lab 3 (Paginación) | DL = `32768`, TamPág = `4096` | Página virtual `8`, Desplazamiento `0` |
-| **8** | Fallo de Página | Lab 3 (Paginación) | DL = `4100` | `Fallo de página` (Presencia = 0 en disco) |
-| **9** | Segmentación Válida | Lab 4 (Segmentación) | Segmento = `2`, Desplazamiento = `10` | `Acceso Válido`: DF = $1024 + 10 = \mathbf{1034}$ |
-| **10** | Violación de Segmento | Lab 4 (Segmentación) | Segmento = `1`, Desplazamiento = `371` | `Trap`: Segmentation Fault ($371 \ge 180$) |
-| **11** | Regla del 50% Knuth | Lab 1 (Particiones) | Escenario 2 (Frag. Externa) | Huecos representan aprox. `un tercio` del total |
+| **1** | Primer Ajuste (Huecos originales) | Lab 1 (Particiones) | Estrategia: First-Fit, 3 pasos | Asignación en huecos originales: `20 KB`, `10 KB`, `12 KB` |
+| **2** | Mejor Ajuste (Huecos originales) | Lab 1 (Particiones) | Estrategia: Best-Fit, 3 pasos | Asignación en huecos originales: `12 KB`, `9 KB`, `10 KB` |
+| **3** | Peor Ajuste (Huecos originales) | Lab 1 (Particiones) | Estrategia: Worst-Fit, 3 pasos | Asignación en huecos originales: `20 KB`, `18 KB`, `15 KB` |
+| **4** | Buddy System (Mínimo 16 KB) | Lab 2 (Buddy) | Escenario 2, P1(12), P2(9), P3(10) | Todos se asignan en bloques de `16 KB` (mínimo permitido) |
+| **5** | Bits Lógicos/Físicos | Lab 3 (Paginación) | Apartado "Desglose en MMU" | `23 bits` lógicos y `22 bits` físicos |
+| **6** | Desglose DL 20000 | Lab 3 (Paginación) | Ingreso manual: DL = `20000` | Página virtual `4`, Desplazamiento `3616` |
+| **7** | Desglose DL 32768 | Lab 3 (Paginación) | Ingreso manual: DL = `32768` | Página virtual `8`, Desplazamiento `0` |
+| **8** | Fallo de Página (Bit pres. 0) | Lab 3 (Paginación) | Ingreso manual: DL = `4100` | `Excepción por fallo de página` (Bit presencia = 0, ausente de RAM) |
+| **9** | Segmentación Válida (bytes) | Lab 4 (Segmentación) | Segmento = `2`, Desplazamiento = `10` | `Acceso Válido`: DF = $1024 + 10 = \mathbf{1034}\text{ bytes}$ |
+| **10** | Violación de Límite (bytes) | Lab 4 (Segmentación) | Segmento = `1`, Desplazamiento = `371` | `Trap`: Segmentation Fault ($371 \ge 180\text{ bytes}$) |
+| **11** | Regla del 50% Knuth | Lab 1 (Particiones) | Análisis de estado estable | Se generan aprox. $N/2$ huecos ($\sim$ un tercio del total) |
 | **12** | Segmentación Paginada | Lab 4 / Concepto | 8 KB máx. / páginas de 1 KB | `8 páginas` por cada segmento |
 
 ---

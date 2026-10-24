@@ -72,7 +72,7 @@
         <!-- SIMULADOR 1: Particiones Variables y Estrategias de Colocación -->
         <section class="card simulator-card" id="alloc-simulator">
             <h2>🧠 Laboratorio 1: Colocación en Particiones Variables</h2>
-            <p>Compara en vivo las estrategias de <strong>Primer Ajuste</strong>, <strong>Mejor Ajuste</strong>, <strong>Peor Ajuste</strong> y <strong>Siguiente Ajuste</strong> sobre la memoria física. Observa la fragmentación externa, el desperdicio residual y el efecto de la compactación dinámica.</p>
+            <p>Compara en vivo las estrategias de <strong>Primer Ajuste</strong>, <strong>Mejor Ajuste</strong>, <strong>Peor Ajuste</strong> y <strong>Siguiente Ajuste</strong> sobre la memoria física. Observa la fragmentación externa, el hueco residual libre y el efecto de la compactación dinámica.</p>
 
             <!-- Selector de Escenario -->
             <div class="flex flex-wrap gap-2 mb-4">
@@ -113,10 +113,10 @@
                 <div class="badge" id="badge-alloc-status">Estado: Listo</div>
                 <div class="badge success" id="badge-alloc-free">Libre: 96 KB</div>
                 <div class="badge warning" id="badge-alloc-holes">Huecos: 8</div>
-                <div class="badge danger" id="badge-alloc-frag">Frag. Externa: 0 KB</div>
+                <div class="badge info" id="badge-alloc-frag">Libre total: 96 KB | Mayor hueco: 20 KB</div>
             </div>
 
-            <!-- Panel de Desperdicio Residual por Proceso -->
+            <!-- Panel de Hueco Residual Libre por Proceso -->
             <div id="alloc-residuals-panel" class="mb-4 hidden"></div>
 
             <div id="alloc-log" class="log-box"></div>
@@ -203,19 +203,17 @@
         <!-- SIMULADOR 3: Traducción MMU en Paginación Simple -->
         <section class="card simulator-card" id="paging-simulator">
             <h2>📑 Laboratorio 3: Traducción de Direcciones en Paginación Simple</h2>
-            <p>La MMU desglosa la dirección lógica generada por la CPU en <strong>Número de Página (<em>p</em>)</strong> y <strong>Desplazamiento (<em>d</em>)</strong>. Consulta la tabla de páginas y calcula la <strong>Dirección Física</strong> en RAM o lanza un <strong>Fallo de Página</strong> si no está presente.</p>
+            <p>La MMU desglosa la dirección lógica generada por la CPU en <strong>Número de Página (<em>p</em>)</strong> y <strong>Desplazamiento (<em>d</em>)</strong>. Consulta la tabla de páginas y calcula la <strong>Dirección Física</strong> en RAM o lanza una <strong>Excepción por fallo de página</strong> si no está presente.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div class="input-group">
                     <label for="paging-dl-input">Dirección Lógica (Decimal):</label>
-                    <input type="number" id="paging-dl-input" value="20000">
+                    <input type="number" id="paging-dl-input" value="20000" min="0">
                 </div>
                 <div class="input-group">
                     <label for="paging-size-select">Tamaño de Página:</label>
-                    <select id="paging-size-select">
-                        <option value="4096" selected>4 KB (4096 bytes - 12 bits disp)</option>
-                        <option value="512">512 bytes (9 bits disp)</option>
-                        <option value="1024">1 KB (1024 bytes - 10 bits disp)</option>
+                    <select id="paging-size-select" disabled class="opacity-80 cursor-not-allowed">
+                        <option value="4096" selected>4 KB (4096 bytes - Fijo según tabla de proceso)</option>
                     </select>
                 </div>
                 <div class="input-group flex items-end">
@@ -235,7 +233,7 @@
                 </div>
 
                 <div class="mmu-box">
-                    <h3>2. Tabla de Páginas del Proceso (56 KB)</h3>
+                    <h3>2. Fragmento de la tabla de páginas del proceso, páginas 0 a 7</h3>
                     <div class="max-h-36 overflow-y-auto">
                         <table class="styled-table text-xs">
                             <thead>
@@ -277,7 +275,7 @@
         <!-- SIMULADOR 4: Segmentación Simple y Paginada -->
         <section class="card simulator-card" id="seg-simulator">
             <h2>🛡️ Laboratorio 4: Segmentación y Validación por Hardware</h2>
-            <p>La MMU verifica en cada acceso que el desplazamiento <em>d &lt; Límite</em>. Si se excede, lanza una trampa por <strong>Segmentation Fault</strong>. Si es válido, calcula <strong>DF = Base + <em>d</em></strong>. Experimenta con las direcciones de prueba para verificar accesos válidos y violaciones de límite.</p>
+            <p>La MMU verifica en cada acceso que el desplazamiento <em>d &lt; Límite</em> (donde bases, límites y desplazamientos se expresan en unidades direccionables / bytes). Si se excede, lanza una trampa por <strong>Segmentation Fault</strong>. Si es válido, calcula <strong>DF = Base + <em>d</em></strong>. Experimenta con las direcciones de prueba para verificar accesos válidos y violaciones de límite.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div class="input-group">
@@ -285,8 +283,8 @@
                     <input type="number" id="seg-num-input" min="0" max="4" value="2">
                 </div>
                 <div class="input-group">
-                    <label for="seg-offset-input">Desplazamiento (d):</label>
-                    <input type="number" id="seg-offset-input" value="10">
+                    <label for="seg-offset-input">Desplazamiento (d en bytes):</label>
+                    <input type="number" id="seg-offset-input" value="10" min="0">
                 </div>
                 <div class="input-group flex items-end">
                     <button id="btn-translate-seg" class="btn-primary w-full h-[42px]">⚡ Validar Acceso MMU</button>
@@ -295,10 +293,10 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="mmu-box">
-                    <h3>Tabla de Segmentos en RAM (Base y Límite)</h3>
+                    <h3>Tabla de Segmentos en RAM (unidades en bytes)</h3>
                     <table class="styled-table text-xs">
                         <thead>
-                            <tr><th>Seg</th><th>Base (DF)</th><th>Límite</th><th>Acceso Rápido</th></tr>
+                            <tr><th>Seg</th><th>Base (bytes)</th><th>Límite (bytes)</th><th>Acceso Rápido</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>0</td><td>150</td><td>250</td><td><button class="text-blue-500 underline" onclick="loadSegSample(0, 224)">Prueba (0, 224)</button></td></tr>

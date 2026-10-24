@@ -491,7 +491,16 @@ body {
     line-height: 1.4;
 }
 
-/* Tables */
+/* Custom Links & Tables */
+a {
+    text-decoration: none;
+    color: #464feb;
+}
+
+[data-theme="dark"] a {
+    color: #818cf8;
+}
+
 .styled-table {
     width: 100%;
     border-collapse: collapse;
@@ -499,19 +508,23 @@ body {
     margin: 0.75rem 0;
 }
 
-.styled-table th, .styled-table td {
+.styled-table th, .styled-table td, tr th, tr td {
     padding: 0.6rem 0.75rem;
     text-align: left;
-    border-bottom: 1px solid var(--card-border);
+    border: 1px solid #e6e6e6;
 }
 
-.styled-table th {
-    background: rgba(0, 0, 0, 0.04);
+[data-theme="dark"] .styled-table th, [data-theme="dark"] .styled-table td, [data-theme="dark"] tr th, [data-theme="dark"] tr td {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+tr th, .styled-table th {
+    background-color: #f5f5f5;
     font-weight: 600;
 }
 
-[data-theme="dark"] .styled-table th {
-    background: rgba(255, 255, 255, 0.05);
+[data-theme="dark"] tr th, [data-theme="dark"] .styled-table th {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Exercises */
