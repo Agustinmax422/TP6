@@ -1,0 +1,75 @@
+{
+  "tp_metadata": {
+    "tp_id": "TSO-2026-TP6",
+    "title": "TP N° 6: Gestión de Memoria Principal",
+    "catedra": "Teoría de Sistemas Operativos - UNJu Facultad de Ingeniería",
+    "version": "1.0.0"
+  },
+  "security": {
+    "algorithm": "SHA-256 + Salted HMAC",
+    "protected": true
+  },
+  "max_score": 100,
+  "exercises": {
+    "ej1_primer_ajuste": {
+      "weight": 8,
+      "hash": "765b17115e7788d7557385cb393b1fa6c7b7c22396b324879d664274c040f2dd",
+      "feedback": "Consultar Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19"
+    },
+    "ej2_mejor_ajuste": {
+      "weight": 8,
+      "hash": "064e3007b60edce6fde46c6e605d0bb7427c420bbd61f6b3728b0da483a2d3b7",
+      "feedback": "Consultar Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19"
+    },
+    "ej3_peor_ajuste": {
+      "weight": 8,
+      "hash": "47f7cd39eece8382d6572f4579ef26fcb839688431117e448f4e68ceeabf1e28",
+      "feedback": "Consultar Silberschatz Cap. 8.3 / Diapositivas U6 pág. 19"
+    },
+    "ej4_buddy_system": {
+      "weight": 8,
+      "hash": "6c83a17b3300c030bf37eb2a976b3e56f64c0eec02d66845de94d226d2391084",
+      "feedback": "Consultar Tanenbaum Cap. 3.2 / Stallings Cap. 7.2"
+    },
+    "ej5_dir_logica_fisica_bits": {
+      "weight": 9,
+      "hash": "170fee27251ed3352e6d2e29e458ce6e8407decac05d9d5155dadb5bf30caa7e",
+      "feedback": "Consultar Silberschatz Cap. 8.4 / Diapositivas U6 pág. 33"
+    },
+    "ej6_paginacion_calculo_20000": {
+      "weight": 9,
+      "hash": "ec5ae9a23e7aaf6bae27cc44bc643e7a3e8b1f9455b46d319cf217e240fc3d3c",
+      "feedback": "Consultar Silberschatz Cap. 8.4 / Diapositivas U6 pág. 32-33"
+    },
+    "ej7_paginacion_calculo_32768": {
+      "weight": 8,
+      "hash": "0e1fe986c6582f251cf84bef64935cbdf33f6e97f7913cbaeb6091e08f34b4a7",
+      "feedback": "Consultar Silberschatz Cap. 8.4 / Diapositivas U6 pág. 32-33"
+    },
+    "ej8_tabla_paginas_traduccion": {
+      "weight": 9,
+      "hash": "4e8ce0f8ec6bb6da76e622d7c9df2f6351822be676ada5cc16eab030b627ca68",
+      "feedback": "Consultar Silberschatz Cap. 8.4 / Diapositivas U6 pág. 35"
+    },
+    "ej9_segmentacion_traduccion": {
+      "weight": 8,
+      "hash": "9fdd543d2891eb1acf55050c1147df1c23e9dca4e05c13089dad93f417ac2a91",
+      "feedback": "Consultar Silberschatz Cap. 8.6 / Diapositivas U6 pág. 38"
+    },
+    "ej10_segmentacion_violacion": {
+      "weight": 9,
+      "hash": "f38559a886565add90937565983e6d7ae30815865a0c60da450527a4137ad330",
+      "feedback": "Consultar Silberschatz Cap. 8.6 / Diapositivas U6 pág. 38"
+    },
+    "ej11_regla_cincuenta": {
+      "weight": 8,
+      "hash": "7c3a237304cc76aa606fb3a3d48cf1ea1cfd83ddad09c627b09fc9ecdaae6126",
+      "feedback": "Consultar Silberschatz Cap. 8.3 / Diapositivas U6 pág. 25-26"
+    },
+    "ej12_segmentacion_paginada": {
+      "weight": 8,
+      "hash": "22c049a9c4474cf9b82f573c5557c953d8321b8dce32a961ae1e21c1042674d3",
+      "feedback": "Consultar Silberschatz Cap. 8.7 / Diapositivas U6 pág. 45-47"
+    }
+  }
+}
