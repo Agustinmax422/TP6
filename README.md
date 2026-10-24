@@ -52,11 +52,6 @@ Este TP se desarrolla a través de un entorno interactivo visual de simulación 
   - Fenómenos a observar (residuos, fragmentación interna, trampas de hardware).
   - Matriz de correspondencia directa con los 12 ejercicios de autoevaluación.
 
-- **Modelado Lógico y Problemas Analíticos (`modelado_logico.md`):**
-  - Demostración formal de la Regla del 50% de Donald Knuth.
-  - Derivación matemática del tamaño óptimo de página ($s^* = \sqrt{2 \cdot p \cdot e}$).
-  - Pseudocódigo algorítmico estructurado de la rutina de MMU para Segmentación Paginada.
-
 ---
 
 ### 2️⃣ Clonar y Configurar
