@@ -75,11 +75,12 @@
             <p>Compara en vivo las estrategias de <strong>Primer Ajuste</strong>, <strong>Mejor Ajuste</strong>, <strong>Peor Ajuste</strong> y <strong>Siguiente Ajuste</strong> sobre la memoria física. Observa la fragmentación externa, el hueco residual libre y el efecto de la compactación dinámica.</p>
 
             <!-- Selector de Escenario -->
-            <div class="flex flex-wrap gap-2 mb-4">
+            <div class="flex flex-wrap gap-2 mb-4 items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-500 self-center mr-2">Escenario:</span>
                 <button id="btn-scene-tp" class="btn-primary text-xs active">📋 1. Caso Base: 8 Huecos (20, 7, 10, 12, 5, 9, 15, 18 KB)</button>
                 <button id="btn-scene-frag" class="btn-secondary text-xs">💥 2. Fragmentación Externa Severa</button>
-                <button id="btn-scene-compact" class="btn-secondary text-xs">🗜️ 3. Compactación de Memoria</button>
+                <span class="text-gray-300 dark:text-gray-600 mx-1">|</span>
+                <button id="btn-scene-compact" class="btn-secondary text-xs">🗜️ Compactar estado actual</button>
             </div>
 
             <!-- Controles de Algoritmo -->
@@ -260,7 +261,7 @@
             <!-- Calculadora de Fragmentación Interna -->
             <div class="p-3 bg-gray-100 dark:bg-slate-800/60 rounded-lg text-sm flex flex-wrap justify-between items-center">
                 <span>Fragmentación interna de proceso (56 KB con pág 4 KB): <strong class="text-emerald-500">0 bytes</strong> (exacto).</span>
-                <span class="text-xs text-gray-500">Para 20000 bytes: 480 bytes desperdiciados en última página.</span>
+                <span class="text-xs text-gray-500">Para un proceso de 20000 bytes: 480 bytes de fragmentación interna en la última página.</span>
             </div>
 
             <div class="lab-to-exercise-banner">

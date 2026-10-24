@@ -87,7 +87,7 @@ const exercisesData = [
         question: 'Considere un espacio de direcciones lógico de 16 páginas de 512 KB cada una, mapeado sobre una memoria física compuesta por 8 marcos. ¿Cuántos bits componen una dirección lógica y una física respectivamente?',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 33',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'En el apartado "Desglose en MMU" del Simulador 3, analiza cómo los bits de la dirección se dividen entre número de página virtual y desplazamiento (offset).',
+        labHint: 'Descompón cada dirección en número de página o marco y desplazamiento: 16 páginas requieren 4 bits, 8 marcos requieren 3 bits y una página de 512 KB requiere 19 bits de desplazamiento.',
         options: [
             { value: '24_20', label: '24 bits de dirección lógica y 20 bits de dirección física' },
             { value: '23_22', label: '23 bits de dirección lógica y 22 bits de dirección física' },
@@ -117,7 +117,7 @@ const exercisesData = [
         question: 'Para un sistema con páginas de 4 KB (4096 bytes), calcule el número de página virtual y el desplazamiento correspondientes a la dirección decimal 32768:',
         biblio: 'Silberschatz Cap. 8.4 / Diapositivas U6 pág. 32-33',
         labRef: { id: 'paging-simulator', name: 'Laboratorio 3: Paginación Simple MMU', badge: '🧪 Lab 3: Paginación MMU' },
-        labHint: 'Ingresa manualmente Dirección Lógica = 32768 y pulsa el botón de traducción para observar cómo 32768 / 4096 resulta exactamente en página 8 con residuo 0.',
+        labHint: 'Ingresa Dirección Lógica = 32768 para comprobar que se descompone en página 8 y desplazamiento 0. La página 8 no está incluida en el fragmento mostrado de la tabla, por lo que el laboratorio no permite verificar su marco físico.',
         options: [
             { value: 'p7_d4095', label: 'Página virtual 7 y desplazamiento 4095' },
             { value: 'p8_d1024', label: 'Página virtual 8 y desplazamiento 1024' },
@@ -137,7 +137,7 @@ const exercisesData = [
             { value: 'direccion_fisica_directa', label: 'La MMU accede directamente al marco 1 sumando el desplazamiento 4' },
             { value: 'violacion_segmento', label: 'Se produce una trampa por violación de límite de segmento en el hardware' },
             { value: 'compactacion_automatica', label: 'El sistema operativo compacta la memoria física antes de traducir' },
-            { value: 'fallo_pagina_no_cargada', label: 'No hay correspondencia física porque la página no se encuentra actualmente en memoria principal (Excepción por fallo de página)' }
+            { value: 'fallo_pagina_no_cargada', label: 'Se produce una excepción por fallo de página porque la página 1 no está presente en memoria principal' }
         ]
     },
     {
@@ -162,9 +162,9 @@ const exercisesData = [
         question: 'Dada la tabla de segmentos donde los valores se expresan en unidades direccionables (bytes) y el Segmento 1 tiene Base: 650 bytes y Límite: 180 bytes. ¿Qué acción emprende la MMU al solicitar la dirección lógica (1, 371), con desplazamiento de 371 bytes?',
         biblio: 'Silberschatz Cap. 8.6 / Diapositivas U6 pág. 38',
         labRef: { id: 'seg-simulator', name: 'Laboratorio 4: Segmentación MMU', badge: '🧪 Lab 4: Segmentación MMU' },
-        labHint: 'Ingresa manualmente Segmento = 1, Desplazamiento = 371 y pulsa el botón de validación. Dado que el desplazamiento 371 supera el límite de 180 del Segmento 1, la MMU dispara un Trap por violación de límite (Segmentation Fault).',
+        labHint: 'Ingresa manualmente Segmento = 1, Desplazamiento = 371 y pulsa el botón de validación. Dado que el desplazamiento 371 supera el límite de 180 del Segmento 1, la MMU genera una excepción por violación de límite (trap).',
         options: [
-            { value: 'violacion_limite_trap', label: 'Trap por violación de límite (desplazamiento 371 bytes supera el límite de 180 bytes)' },
+            { value: 'violacion_limite_trap', label: 'La MMU genera una excepción por violación de límite (trap)' },
             { value: 'traduccion_correcta_1021', label: 'Se accede a la dirección física 1021 bytes sumando la base al desplazamiento' },
             { value: 'reasignacion_segmento', label: 'El proceso es reubicado dinámicamente al segmento de datos contiguo' },
             { value: 'paginacion_demanda', label: 'La CPU carga una nueva página desde el área de intercambio de swap' }
@@ -179,10 +179,10 @@ const exercisesData = [
         labRef: { id: 'alloc-simulator', name: 'Laboratorio 1: Asignación Continua', badge: '🧪 Lab 1: Particiones Variables' },
         labHint: 'Revisa el Laboratorio 1 tras realizar múltiples asignaciones y liberaciones con Primer Ajuste: la fragmentación externa genera aproximadamente N/2 huecos para N procesos en memoria, representando cerca de un tercio del total de bloques.',
         options: [
-            { value: 'la_mitad', label: 'Se generan aproximadamente N huecos, equivalentes a la mitad del total de bloques' },
-            { value: 'una_cuarta_parte', label: 'Se generan aproximadamente N/4 huecos, equivalentes a una cuarta parte del total de bloques' },
+            { value: 'la_mitad', label: 'Se generan aproximadamente N huecos, equivalentes a cerca de la mitad del total de bloques' },
+            { value: 'una_cuarta_parte', label: 'Se generan aproximadamente N/4 huecos, equivalentes a cerca de una quinta parte del total de bloques' },
             { value: 'un_tercio', label: 'Se generan aproximadamente N/2 huecos, equivalentes a cerca de un tercio del total de bloques' },
-            { value: 'el_diez_por_ciento', label: 'Se generan menos de N/10 huecos, equivalentes a menos del diez por ciento del total de bloques' }
+            { value: 'el_diez_por_ciento', label: 'Se generan menos de N/10 huecos, equivalentes a menos de una décima parte del total de bloques' }
         ]
     },
     {
@@ -224,21 +224,24 @@ let allocMemory = [];
 let allocRequests = [12, 9, 10];
 let allocCurrentStep = 0;
 let allocNextFitLastIdx = 0;
+let currentAllocScene = 'btn-scene-tp';
 
 function initAllocSimulator() {
     loadSceneTP();
 
     document.getElementById('btn-scene-tp').addEventListener('click', () => {
+        currentAllocScene = 'btn-scene-tp';
         setActiveSceneBtn('btn-scene-tp');
         loadSceneTP();
     });
     document.getElementById('btn-scene-frag').addEventListener('click', () => {
+        currentAllocScene = 'btn-scene-frag';
         setActiveSceneBtn('btn-scene-frag');
         loadSceneFrag();
     });
     document.getElementById('btn-scene-compact').addEventListener('click', () => {
-        setActiveSceneBtn('btn-scene-compact');
         compactMemory();
+        setActiveSceneBtn(currentAllocScene);
     });
 
     document.getElementById('select-alloc-algo').addEventListener('change', () => {
@@ -255,7 +258,7 @@ function initAllocSimulator() {
 }
 
 function setActiveSceneBtn(id) {
-    ['btn-scene-tp', 'btn-scene-frag', 'btn-scene-compact'].forEach(btnId => {
+    ['btn-scene-tp', 'btn-scene-frag'].forEach(btnId => {
         const el = document.getElementById(btnId);
         if (el) {
             el.className = (btnId === id) ? 'btn-primary text-xs active' : 'btn-secondary text-xs';
@@ -1057,8 +1060,8 @@ function translateSegmentation() {
 
     if (!Number.isInteger(d) || d < 0 || d >= seg.limite) {
         badge.className = 'badge danger text-sm text-center py-2';
-        badge.textContent = '💥 Trap: Segmentation Fault (Violación de Límite)';
-        compEl.innerHTML = `<span class="text-rose-500 font-bold">${d} &ge; ${seg.limite} (DESPLAZAMIENTO EXCEDE EL LÍMITE)</span>`;
+        badge.textContent = '💥 Excepción por violación de límite (trap): Segmentation Fault';
+        compEl.innerHTML = `<span class="text-rose-500 font-bold">${d < 0 ? 'DESPLAZAMIENTO NEGATIVO INVÁLIDO' : `${d} &ge; ${seg.limite} (DESPLAZAMIENTO EXCEDE EL LÍMITE)`}</span>`;
         calcEl.textContent = 'Hardware bloquea acceso a la memoria';
         dfEl.textContent = 'Excepción de Núcleo';
     } else {
@@ -1143,7 +1146,7 @@ function renderExercises() {
 
         card.innerHTML = `
             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <div class="exercise-title mb-0">${idx + 1}. ${ex.title}</div>
+                <div class="exercise-title mb-0">${ex.title}</div>
                 ${labLinkHtml}
             </div>
             <details class="biblio-panel">

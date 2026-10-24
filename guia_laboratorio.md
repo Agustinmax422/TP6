@@ -97,7 +97,7 @@ Esta guía te explica detalladamente:
    - Selecciona el botón **`💥 2. Fragmentación Externa Severa`**.
    - Observa la barra de memoria: hay múltiples huecos de 4 KB y 6 KB intercalados con procesos.
    - Nota el indicador **Libre total | Mayor hueco**: marca memoria libre suficiente para un proceso grande, pero ningún hueco individual puede albergarlo (fragmentación externa).
-   - Haz clic en **`🗜️ 3. Compactación de Memoria`**: observa cómo el sistema operativo reubica todos los procesos contiguamente hacia el inicio de la memoria, unificando todo el espacio libre en un único gran bloque.
+   - Haz clic en **`🗜️ Compactar estado actual`**: observa cómo el sistema operativo reubica todos los procesos contiguamente hacia el inicio de la memoria, unificando todo el espacio libre en un único gran bloque sin alterar el escenario activo.
 2. **Qué notar teóricamente:**
    - Donald Knuth demostró formalmente que en particiones variables con First-Fit, si hay $N$ procesos asignados en estado estable, el número de huecos libres tiende a $N/2$ (la mitad de huecos que de procesos).
    - Por ende, los huecos libres representan aproximadamente **un tercio** del total de bloques (procesos + huecos: $\frac{0.5N}{N + 0.5N} = \frac{1}{3}$).
@@ -204,6 +204,7 @@ $$2^{k-1} < x \le 2^k$$
    - Nota que cuando una dirección lógica es múltiplo exacto del tamaño de página, el desplazamiento es siempre $0$, apuntando al primer byte de la página siguiente.
 3. **Validación:**
    - Página virtual = 8, Desplazamiento = 0.
+   - ⚠️ *Aclaración sobre el simulador:* El fragmento de tabla implementado cubre las páginas 0 a 7, por lo que el laboratorio comprueba el desglose aritmético pero no dispone del marco para la página 8.
    - ✅ *Resuelve el **Ejercicio 7***.
 
 ---
@@ -226,13 +227,13 @@ $$2^{k-1} < x \le 2^k$$
 
 ### 🧪 Experimento 3.4: Análisis de Bits de Dirección Lógica vs. Física
 1. **Concepto teórico a verificar:**
-   - Espacio lógico: 16 páginas de 512 KB cada una.
-     - Tamaño de página = $512\text{ KB} = 2^{19}\text{ bytes} \implies 19\text{ bits}$ de desplazamiento.
-     - 16 páginas $= 2^4 \implies 4\text{ bits}$ de página.
+   - Descompón cada dirección en número de página o marco y desplazamiento:
+     - 16 páginas $= 2^4 \implies \mathbf{4\text{ bits}}$ de página virtual.
+     - 8 marcos $= 2^3 \implies \mathbf{3\text{ bits}}$ de marco físico.
+     - Página de $512\text{ KB} = 2^{19}\text{ bytes} \implies \mathbf{19\text{ bits}}$ de desplazamiento.
      - Dirección lógica total = $4 + 19 = \mathbf{23\text{ bits}}$.
-   - Espacio físico: 8 marcos de 512 KB.
-     - 8 marcos $= 2^3 \implies 3\text{ bits}$ de marco.
      - Dirección física total = $3 + 19 = \mathbf{22\text{ bits}}$.
+   - ⚠️ *Nota pedagógica:* Este ejercicio analiza una arquitectura teórica con páginas de 512 KB, mientras que el Laboratorio 3 en pantalla adopta páginas de 4 KB con fines visuales interactivos.
    - ✅ *Resuelve el **Ejercicio 5***.
 
 ---
@@ -272,7 +273,7 @@ $$2^{k-1} < x \le 2^k$$
 
 ---
 
-### 🧪 Experimento 4.2: Violación de Límite y Trap de Hardware para la Dupla $(1, 371)$
+### 🧪 Experimento 4.2: Excepción por Violación de Límite (Trap) para la Dupla $(1, 371)$
 1. **Procedimiento:**
    - Ingresa manualmente en los campos del simulador:
      - **Número de Segmento (S):** `1`
@@ -283,12 +284,12 @@ $$2^{k-1} < x \le 2^k$$
    - La MMU evalúa:
      $$d \ge \text{Límite} \iff 371 \ge 180 \implies \mathbf{VIOLACIÓN\ DE\ LÍMITE}$$
    - El panel se tiñe de color **rojo intenso**:
-     `💥 Trap: Segmentation Fault (Violación de Límite)`  
+     `💥 Excepción por violación de límite (trap): Segmentation Fault`  
      `371 >= 180 (DESPLAZAMIENTO EXCEDE EL LÍMITE)`  
      `Hardware bloquea acceso a la memoria física: Excepción de Núcleo.`
    - La MMU **bloquea físicamente las líneas del bus de direcciones**, impidiendo que un proceso corrompa segmentos ajenos (así como también rechaza desplazamientos negativos o no enteros que no cumplan $0 \le d < \text{Límite}$).
 3. **Validación:**
-   - Acción: Trap por violación de límite (desplazamiento 371 bytes supera límite de 180 bytes).
+   - Acción: Excepción por violación de límite (trap) (desplazamiento 371 bytes supera límite de 180 bytes).
    - ✅ *Resuelve el **Ejercicio 10***.
 
 ---
@@ -320,7 +321,7 @@ Utiliza esta tabla para verificar que completaste cada comprobación antes de en
 | **7** | Desglose DL 32768 | Lab 3 (Paginación) | Ingreso manual: DL = `32768` | Página virtual `8`, Desplazamiento `0` |
 | **8** | Fallo de Página (Bit pres. 0) | Lab 3 (Paginación) | Ingreso manual: DL = `4100` | `Excepción por fallo de página` (Bit presencia = 0, ausente de RAM) |
 | **9** | Segmentación Válida (bytes) | Lab 4 (Segmentación) | Segmento = `2`, Desplazamiento = `10` | `Acceso Válido`: DF = $1024 + 10 = \mathbf{1034}\text{ bytes}$ |
-| **10** | Violación de Límite (bytes) | Lab 4 (Segmentación) | Segmento = `1`, Desplazamiento = `371` | `Trap`: Segmentation Fault ($371 \ge 180\text{ bytes}$) |
+| **10** | Violación de Límite (bytes) | Lab 4 (Segmentación) | Segmento = `1`, Desplazamiento = `371` | `Excepción por violación de límite (trap)` ($371 \ge 180\text{ bytes}$) |
 | **11** | Regla del 50% Knuth | Lab 1 (Particiones) | Análisis de estado estable | Se generan aprox. $N/2$ huecos ($\sim$ un tercio del total) |
 | **12** | Segmentación Paginada | Lab 4 / Concepto | 8 KB máx. / páginas de 1 KB | `8 páginas` por cada segmento |
 
